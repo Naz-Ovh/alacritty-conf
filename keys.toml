@@ -1,0 +1,38 @@
+# %APPDATA%\alacritty\keys.toml
+#
+# Warp/WezTerm-style shortcuts using only Alacritty's built-in actions.
+# Alacritty has no tabs or splits, so "new tab" opens a new window
+# (Windows groups them on the taskbar; Alt+Tab / Win+number switch).
+#
+# Already built in, no line needed:
+#   Ctrl+Shift+C / V   copy / paste          Ctrl+= / - / 0   font size
+#   Shift+PgUp / PgDn  scroll a page         Shift+Home / End top / bottom
+#   Ctrl+Shift+B       search backward       Alt+F4           close window
+
+[keyboard]
+bindings = [
+  # ── Windows (Alacritty's "tabs") ─────────────────────────────────────
+  { key = "T",     mods = "Control",       action = "CreateNewWindow" },  # Warp's new tab
+  { key = "T",     mods = "Control|Shift", action = "CreateNewWindow" },
+  { key = "N",     mods = "Control|Shift", action = "CreateNewWindow" },
+  { key = "Enter", mods = "Control|Alt",   action = "ToggleMaximized" },
+  { key = "F11",                            action = "ToggleFullscreen" },
+
+  # ── Clipboard ────────────────────────────────────────────────────────
+  # Selecting already copies. Ctrl+C stays SIGINT.
+  { key = "V", mods = "Control", action = "Paste" },
+
+  # ── Search / copy mode / clear ───────────────────────────────────────
+  # Ctrl+Shift+F searches forward (built in). Enter / Shift+Enter = next / prev.
+  { key = "X", mods = "Control|Shift", action = "ToggleViMode" },   # copy mode: hjkl, v select, y copy, / search
+  { key = "K", mods = "Control|Shift", action = "ClearHistory" },   # Warp's clear: scrollback...
+  { key = "K", mods = "Control|Shift", chars = "\u000c" },          # ...and the screen (Ctrl+L)
+  { key = "Home", mods = "Control|Shift", action = "ScrollToTop" },
+  { key = "End",  mods = "Control|Shift", action = "ScrollToBottom" },
+  { key = "Up",   mods = "Control|Shift", action = "ScrollLineUp" },
+  { key = "Down", mods = "Control|Shift", action = "ScrollLineDown" },
+
+  # Ctrl+Shift+Space is the quick-select hint (alacritty.toml), so free it
+  # from vi mode (now on Ctrl+Shift+X).
+  { key = "Space", mods = "Control|Shift", action = "None" },
+]

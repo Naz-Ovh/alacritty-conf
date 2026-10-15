@@ -1,0 +1,70 @@
+# %APPDATA%\alacritty\palette.toml
+#
+# Your WezTerm palette (~/.config/wezterm/palette.lua), ported 1:1.
+# Change colors here; the zellij bar/frames use the same hex values
+# (~/.config/zellij/config.kdl -> themes + zjstatus colors).
+#
+# WezTerm switched between two backgrounds with the OS theme. Alacritty
+# can't follow the OS, so pick one:
+#   dark (default)  background = "#000000"   true black, OLED-friendly
+#   dim             background = "#121317"   slightly lifted dark
+
+[colors.primary]
+background = "#000000"
+foreground = "#d6d6d6"
+
+[colors.cursor]
+text   = "#000000"
+cursor = "#8b8d94"
+
+[colors.vi_mode_cursor]
+text   = "#000000"
+cursor = "#7aa2f7"
+
+[colors.selection]
+text       = "#ffffff"
+background = "#283457"
+
+[colors.search.matches]
+foreground = "#15161d"
+background = "#e0af68"
+
+[colors.search.focused_match]
+foreground = "#15161d"
+background = "#ff9e64"
+
+[colors.hints.start]
+foreground = "#15161d"
+background = "#7aa2f7"
+
+[colors.hints.end]
+foreground = "#7aa2f7"
+background = "#15161d"
+
+[colors.footer_bar]
+foreground = "#c0caf5"
+background = "#15161d"
+
+[colors.line_indicator]
+foreground = "#c0caf5"
+background = "#2a2d3a"
+
+[colors.normal]
+black   = "#1b1d27"
+red     = "#f7768e"
+green   = "#9ece6a"
+yellow  = "#e0af68"
+blue    = "#7aa2f7"
+magenta = "#bb9af7"
+cyan    = "#7dcfff"
+white   = "#a9b1d6"
+
+[colors.bright]
+black   = "#414868"
+red     = "#ff7a93"
+green   = "#b9f27c"
+yellow  = "#ff9e64"
+blue    = "#7da6ff"
+magenta = "#bb9af7"
+cyan    = "#0db9d7"
+white   = "#c0caf5"

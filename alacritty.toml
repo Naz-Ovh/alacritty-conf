@@ -1,0 +1,103 @@
+# %APPDATA%\alacritty\alacritty.toml
+#
+# Plain, native Alacritty: no multiplexer, no extra bars.
+#
+#   alacritty.toml  -> this file: window, font, shell, mouse, hints
+#   palette.toml    -> colors, ported 1:1 from ~/.config/wezterm/palette.lua
+#   keys.toml       -> Warp-style shortcuts, mapped to Alacritty's own actions
+#
+# Every file reloads live on save. No restart needed.
+
+[general]
+import = [
+  "~/AppData/Roaming/alacritty/palette.toml",
+  "~/AppData/Roaming/alacritty/keys.toml",
+]
+live_config_reload = true
+
+# ── Shell ──────────────────────────────────────────────────────────────
+# Fedora (WSL), starting in the Linux home.
+# Native PowerShell instead? program = "pwsh.exe", args = ["-NoLogo"]
+[terminal.shell]
+program = "C:\\Windows\\System32\\wsl.exe"
+args = ["-d", "FedoraLinux-44", "--cd", "~"]
+
+[env]
+# Truecolor for nvim, starship... WSLENV forwards it into Linux.
+COLORTERM = "truecolor"
+WSLENV = "COLORTERM"
+
+# ── Window ─────────────────────────────────────────────────────────────
+[window]
+dimensions = { columns = 160, lines = 40 }   # same launch size as WezTerm
+padding = { x = 14, y = 10 }
+dynamic_padding = true                        # spread leftover pixels evenly
+decorations = "Full"                          # native frame: snap, drag, resize
+decorations_theme_variant = "Dark"            # dark title bar even in OS light mode
+opacity = 1.0                                 # e.g. 0.96 for a hint of transparency
+startup_mode = "Windowed"                     # or "Maximized" / "Fullscreen"
+title = "Alacritty"
+dynamic_title = true                          # your shell's title (dir / running command)
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+# ── Font ───────────────────────────────────────────────────────────────
+# CaskaydiaMono NF: Nerd Fonts' Cascadia Mono - wide letters, full-size icons.
+# Installed per-user; backup in E:\MEGA\Objects\Fonts\Required-Fonts.
+[font]
+normal      = { family = "CaskaydiaMono NF", style = "Regular" }
+bold        = { family = "CaskaydiaMono NF", style = "Bold" }
+italic      = { family = "CaskaydiaMono NF", style = "Italic" }
+bold_italic = { family = "CaskaydiaMono NF", style = "Bold Italic" }
+size = 11.0
+offset = { x = 0, y = 0 }        # letter / line spacing in pixels; try y = 1 for airier lines
+glyph_offset = { x = 0, y = 0 }
+builtin_box_drawing = true       # pixel-perfect box lines + powerline edges
+
+# ── Cursor ─────────────────────────────────────────────────────────────
+[cursor]
+style = { shape = "Block", blinking = "Never" }      # steady = no repaints
+vi_mode_style = { shape = "Beam", blinking = "Off" }
+unfocused_hollow = true
+thickness = 0.15
+
+# ── Selection / mouse ──────────────────────────────────────────────────
+[selection]
+save_to_clipboard = true          # selecting copies, like WezTerm/Linux
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[mouse]
+hide_when_typing = true
+
+[terminal]
+osc52 = "CopyPaste"   # apps (nvim over ssh, tmux) may set the clipboard
+
+[bell]
+duration = 0          # no visual flash
+
+# ── Hints: WezTerm-style "quick select" ────────────────────────────────
+# Ctrl+Shift+Space  label every URL / path / hash / IP on screen -> type the
+#                   label to COPY it (WezTerm's QuickSelect).
+# Ctrl+Shift+U      label every URL -> type the label to OPEN it.
+# Ctrl+Click        open the URL under the mouse (programs that grab the
+#                   mouse, like nvim/htop: Ctrl+Shift+Click).
+[hints]
+alphabet = "jfkdlsahgurieowpq"
+
+[[hints.enabled]]
+command = "C:\\Windows\\explorer.exe"
+hyperlinks = true
+post_processing = true
+persist = false
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`\\\\]+"
+mouse = { enabled = true, mods = "Control" }
+binding = { key = "U", mods = "Control|Shift" }
+
+[[hints.enabled]]
+action = "Copy"
+post_processing = true
+# URLs | ~/ or / paths | git hashes | IPv4[:port] | UUIDs
+regex = "(https?://[^\\s<>\"'`]+)|((~|\\.{1,2})?/[\\w.@~+-]+(/[\\w.@~+-]+)*)|(\\b[0-9a-f]{7,40}\\b)|(\\b\\d{1,3}(\\.\\d{1,3}){3}(:\\d+)?\\b)|(\\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\b)"
+binding = { key = "Space", mods = "Control|Shift" }
